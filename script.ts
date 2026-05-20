@@ -1,3 +1,5 @@
+import {ApiResponse} from "./types";
+
 function getTicketInfo(id: string | number) {
     if (typeof id ==="string"){
         const parsedID=id.split("-")[1]
@@ -34,17 +36,64 @@ console.log(getTicketInfo("support-34"));
 export const estimateResponseTime = (promptLength: number =100, modelType:string ="text") => {
     let responseTime: number;
     if (modelType === "text"){
-       responseTime= 2 + (0.01 * promptLength);
+      return  responseTime= 2 + (0.01 * promptLength);
     }
 
     if (modelType === "image"){
-        responseTime= 5 + (0.02 * promptLength);
+         return  responseTime= 5 + (0.02 * promptLength);
     }
     if (modelType === "code"){
-        responseTime= 3 + (0.05 * promptLength);
+       return  responseTime= 3 + (0.05 * promptLength);
     }
     responseTime =0;
     return responseTime.toFixed(1)
   
 }
 console.log(estimateResponseTime(100, "ere"))
+
+export type Mail = {
+    body: string,
+    from: string,
+    subject: string,
+    to: string[],
+    urgent: boolean,
+}
+
+export function processMail(mail:Mail) {
+    return`
+    From: ${mail.from}
+    To: ${mail.to}
+    Subject: ${mail.subject}
+    Body: ${mail.body}
+    Urgent: ${mail.urgent}
+    `
+}
+
+   const student= { from:"FUTA",
+    to:["akure"],
+    subject:"math",
+    body:"head",
+    urgent: true}
+
+console.log(processMail(student));
+
+const set= new Set<boolean>();
+set.add(true );
+
+console.log(set);
+const map =new Map<string,Mail>();
+map.set("First",student)
+console.log(map);
+
+let a ="boy" as const
+
+
+
+export type Ticket = readonly [id: number, comment: string, label?: string];
+
+export function formatTicket(ticket: Ticket): string {
+    const [id, comment, label] = ticket;
+    return `#${id} ${comment} [${label ? label:""}]`;
+}
+console.log(formatTicket([23,"yererfe"]))
+
