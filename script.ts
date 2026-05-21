@@ -1,4 +1,3 @@
-import {ApiResponse} from "./types";
 
 function getTicketInfo(id: string | number) {
     if (typeof id ==="string"){
@@ -97,3 +96,6 @@ export function formatTicket(ticket: Ticket): string {
 }
 console.log(formatTicket([23,"yererfe"]))
 
+export function pluckEmails<T extends { email: string }>(arr: T[]) {
+    return arr.map(a=>a.email);
+}
